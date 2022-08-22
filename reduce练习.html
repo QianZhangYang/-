@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //实现1-100之间求和
+      // let arr = []
+      // for (let i = 1; i < 101; i++) {
+      //   arr.push(i)
+      // }
+      // let sum = arr.reduce((acc, item, index) => {
+      //   return acc + item
+      // }, 0)
+      // console.log(sum)
+
+      // 利用reduce处理查询字符串
+      // const str = 'http://www.baidu.com/?name=zhangsan&age=18&sex=nan'
+      // function process(url) {
+      //   let arr1 = [...url]
+      //   let i = 0
+      //   let newarr = arr1.reduce((acc, item, index, arr) => {
+      //     if (item == '?') {
+      //       acc.push('{' + '"')
+      //       i = index
+      //     } else if (item == '=') {
+      //       acc.push('"' + ':' + '"')
+      //       i = index
+      //     } else if (item == '&') {
+      //       acc.push('"' + ',' + '"')
+      //       i = index
+      //     }
+      //     if (index > i && i !== 0) {
+      //       acc.push(item)
+      //     }
+      //     if (index == arr.length - 1) {
+      //       acc.push('"' + '}')
+      //     }
+      //     return acc
+      //   }, [])
+      //   let str2 = newarr.reduce((acc, item, index, arr) => {
+      //     return acc + item
+      //   }, '')
+      //   return JSON.parse(str2)
+      // }
+      // console.log(process(str))
+
+      const str = 'http://www.baidu.com/?name=zhangsan&age=18&sex=nan'
+      function process(url) {
+        let arr = [...url]
+        let i = 0
+        let str = arr.reduce((acc, item, index, arr) => {
+          if (item == '?') {
+            acc += '{' + '"'
+            i = index
+          } else if (item == '=') {
+            acc += '"' + ':' + '"'
+            i = index
+          } else if (item == '&') {
+            acc += '"' + ',' + '"'
+            i = index
+          }
+          if (index > i && i !== 0) {
+            acc += item
+          }
+          if (index == arr.length - 1) {
+            acc += '"' + '}'
+          }
+          return acc
+        }, '')
+        return JSON.parse(str)
+      }
+      console.log(process(str))
+    </script>
+  </body>
+</html>
